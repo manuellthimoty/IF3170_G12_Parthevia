@@ -19,7 +19,6 @@ def swap_packages(state: State, first_id: str, second_id: str) -> State:
     result = state.copy()
     first_copy, second_copy = first.copy(), second.copy()
     first_copy.position, second_copy.position = second.position, first.position
-    first_copy.orientation, second_copy.orientation = second.orientation, first.orientation
     result.packages[first_id] = first_copy
     result.packages[second_id] = second_copy
     return result
@@ -28,6 +27,11 @@ def move_package(state: State, package_id: str, position: tuple[int, int, int] |
     result = state.copy()
     result.packages[package_id].position = position
     return result
+
+def rotate_orientation(orientation: tuple[str, str, str], axis: str) -> tuple[str, str, str]:
+    first, second = (item for item in AXES if item != axis)
+    swap = {first: second, second: first}
+    return tuple(swap.get(item, item) for item in orientation)
 
 def rotate_package(state: State, package_id: str, orientation: tuple[str, str, str]) -> State:
     result = state.copy()
@@ -73,9 +77,8 @@ def enumerate_neighbors(
                 return result
 
     for package in packages:
-        for orientation in ORIENTATIONS:
-            if orientation == package.orientation:
-                continue
+        for axis in AXES:
+            orientation = rotate_orientation(package.orientation, axis)
             if add(rotate_package(state, package.id, orientation)):
                 return result
     return result
@@ -100,7 +103,7 @@ def random_neighbor(
         else:
             package = rng.choice(packages)
             if move_type == "rotate":
-                choices = [item for item in ORIENTATIONS if item != package.orientation]
+                choices = [rotate_orientation(package.orientation, axis) for axis in AXES]
                 candidate = rotate_package(state, package.id, rng.choice(choices))
             else:
                 positions = list(_positions_for(package, state))
