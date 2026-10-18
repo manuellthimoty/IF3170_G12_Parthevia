@@ -65,3 +65,7 @@ def save_json(data: Any, path: str | Path) -> None:
     with destination.open("w", encoding="utf-8") as handle:
         json.dump(data, handle, indent=2)
         handle.write("\n")
+
+def load_json(path: str | Path) -> Any:
+    with Path(path).open("r", encoding="utf-8") as handle:
+        return json.load(handle)

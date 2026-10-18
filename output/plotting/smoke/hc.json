@@ -1,0 +1,159 @@
+{
+  "initialState": {
+    "truck": {
+      "dimensions": {
+        "w": 3,
+        "l": 2,
+        "h": 2
+      },
+      "maxCapacity": 10
+    },
+    "packages": [
+      {
+        "id": "A",
+        "dimensions": {
+          "w": 1,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "x",
+          "y",
+          "z"
+        ],
+        "value": 5,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "B",
+        "dimensions": {
+          "w": 2,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "x",
+          "y",
+          "z"
+        ],
+        "value": 9,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": null
+      },
+      {
+        "id": "C",
+        "dimensions": {
+          "w": 1,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "x",
+          "y",
+          "z"
+        ],
+        "value": 4,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": null
+      }
+    ]
+  },
+  "finalState": {
+    "truck": {
+      "dimensions": {
+        "w": 3,
+        "l": 2,
+        "h": 2
+      },
+      "maxCapacity": 10
+    },
+    "packages": [
+      {
+        "id": "A",
+        "dimensions": {
+          "w": 1,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "x",
+          "y",
+          "z"
+        ],
+        "value": 5,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "B",
+        "dimensions": {
+          "w": 2,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "x",
+          "y",
+          "z"
+        ],
+        "value": 9,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "id": "C",
+        "dimensions": {
+          "w": 1,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "x",
+          "y",
+          "z"
+        ],
+        "value": 4,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": [
+          0,
+          1,
+          0
+        ]
+      }
+    ]
+  },
+  "objectiveHistory": [
+    5.0,
+    14.0,
+    18.0
+  ],
+  "iterations": 2,
+  "durationSeconds": 0.008648000017274171,
+  "stopReason": "local_optimum",
+  "sidewaysMoves": 0
+}

@@ -1,0 +1,276 @@
+{
+  "algorithm": "simulated_annealing",
+  "initial_state": {
+    "truck": {
+      "dimensions": {
+        "w": 3,
+        "l": 2,
+        "h": 2
+      },
+      "maxCapacity": 10
+    },
+    "packages": [
+      {
+        "id": "A",
+        "dimensions": {
+          "w": 1,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "x",
+          "y",
+          "z"
+        ],
+        "value": 5,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "B",
+        "dimensions": {
+          "w": 2,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "x",
+          "y",
+          "z"
+        ],
+        "value": 9,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": null
+      },
+      {
+        "id": "C",
+        "dimensions": {
+          "w": 1,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "x",
+          "y",
+          "z"
+        ],
+        "value": 4,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": null
+      }
+    ]
+  },
+  "final_state": {
+    "truck": {
+      "dimensions": {
+        "w": 3,
+        "l": 2,
+        "h": 2
+      },
+      "maxCapacity": 10
+    },
+    "packages": [
+      {
+        "id": "A",
+        "dimensions": {
+          "w": 1,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "z",
+          "y",
+          "x"
+        ],
+        "value": 5,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": [
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "id": "B",
+        "dimensions": {
+          "w": 2,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "x",
+          "y",
+          "z"
+        ],
+        "value": 9,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "id": "C",
+        "dimensions": {
+          "w": 1,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "x",
+          "y",
+          "z"
+        ],
+        "value": 4,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": null
+      }
+    ]
+  },
+  "initial_objective": 5.0,
+  "final_objective": 14.0,
+  "iterations": 25,
+  "history": [
+    5,
+    5,
+    4,
+    5,
+    9,
+    4,
+    4,
+    4,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    14,
+    14,
+    14,
+    14,
+    14,
+    9,
+    9,
+    14,
+    14,
+    14,
+    14,
+    14
+  ],
+  "params": {
+    "initial_temperature": 5,
+    "cooling_rate": 0.999,
+    "min_temperature": 0.001,
+    "max_iterations": 25,
+    "stuck_window": 200,
+    "neighbor_attempts": 40
+  },
+  "extra": {
+    "best_history": [
+      5,
+      5,
+      5,
+      5,
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      14,
+      14,
+      14,
+      14,
+      14,
+      14,
+      14,
+      14,
+      14,
+      14,
+      14,
+      14
+    ],
+    "temperatures": [
+      5,
+      4.995,
+      4.990005,
+      4.985014995,
+      4.980029980005,
+      4.975049950024995,
+      4.9700749000749695,
+      4.965104825174896,
+      4.96013972034972,
+      4.955179580629371,
+      4.950224401048741,
+      4.945274176647692,
+      4.940328902471045,
+      4.935388573568574,
+      4.930453184995005,
+      4.92552273181001,
+      4.9205972090782,
+      4.915676611869122,
+      4.910760935257253,
+      4.905850174321995,
+      4.900944324147673,
+      4.896043379823526,
+      4.8911473364437015,
+      4.886256189107259,
+      4.881369932918151,
+      4.876488562985233
+    ],
+    "acceptance": [
+      [
+        2,
+        4.990005,
+        -1,
+        0.8184028345690886,
+        true
+      ],
+      [
+        5,
+        4.975049950024995,
+        -5,
+        0.36603913133863436,
+        true
+      ],
+      [
+        19,
+        4.905850174321995,
+        -5,
+        0.36088665776807854,
+        true
+      ]
+    ],
+    "final_temperature": 4.876488562985233,
+    "last_state_objective": 14,
+    "stuck_count": 0,
+    "stuck_events": [],
+    "accepted_better": 5,
+    "accepted_worse": 3,
+    "rejected_worse": 0,
+    "sideways": 17,
+    "no_neighbor": 0
+  }
+}

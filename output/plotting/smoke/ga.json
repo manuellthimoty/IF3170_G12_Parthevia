@@ -1,0 +1,195 @@
+{
+  "algorithm": "genetic_algorithm",
+  "initial_state": {
+    "truck": {
+      "dimensions": {
+        "w": 3,
+        "l": 2,
+        "h": 2
+      },
+      "maxCapacity": 10
+    },
+    "packages": [
+      {
+        "id": "A",
+        "dimensions": {
+          "w": 1,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "y",
+          "x",
+          "z"
+        ],
+        "value": 5,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": [
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "B",
+        "dimensions": {
+          "w": 2,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "x",
+          "z",
+          "y"
+        ],
+        "value": 9,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "id": "C",
+        "dimensions": {
+          "w": 1,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "y",
+          "z",
+          "x"
+        ],
+        "value": 4,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": [
+          1,
+          1,
+          1
+        ]
+      }
+    ]
+  },
+  "final_state": {
+    "truck": {
+      "dimensions": {
+        "w": 3,
+        "l": 2,
+        "h": 2
+      },
+      "maxCapacity": 10
+    },
+    "packages": [
+      {
+        "id": "A",
+        "dimensions": {
+          "w": 1,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "y",
+          "x",
+          "z"
+        ],
+        "value": 5,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": [
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "B",
+        "dimensions": {
+          "w": 2,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "x",
+          "z",
+          "y"
+        ],
+        "value": 9,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "id": "C",
+        "dimensions": {
+          "w": 1,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "y",
+          "z",
+          "x"
+        ],
+        "value": 4,
+        "weight": 1,
+        "isFragile": false,
+        "ETA": 0,
+        "position": [
+          1,
+          1,
+          1
+        ]
+      }
+    ]
+  },
+  "initial_objective": 18.0,
+  "final_objective": 18.0,
+  "iterations": 4,
+  "history": [
+    18.0,
+    18.0,
+    18.0,
+    18.0,
+    18.0
+  ],
+  "params": {
+    "population_size": 6,
+    "max_generations": 4,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.2,
+    "tournament_size": 3,
+    "elite_count": 1,
+    "crossover_attempts": 10,
+    "mutation_attempts": 40,
+    "initial_fill_prob": 0.7,
+    "initial_attempts": 20,
+    "seed": 7,
+    "rng_state": null,
+    "initial_selection": "first_max_fitness_generation_0"
+  },
+  "extra": {
+    "mean_history": [
+      13.5,
+      18.0,
+      18.0,
+      18.0,
+      18.0
+    ],
+    "history_includes_generation_0": true,
+    "duration_seconds": 0.002293700003065169
+  }
+}
