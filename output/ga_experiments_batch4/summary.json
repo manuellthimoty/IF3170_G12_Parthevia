@@ -1,0 +1,158 @@
+{
+  "run_count": 18,
+  "completed_as_planned": 18,
+  "variation_measure": "sample standard deviation, denominator n - 1, n = 3 per configuration",
+  "verification": "All saved initial/final states, IDs, objectives, seeds, parameters and history lengths checked.",
+  "configurations": [
+    {
+      "id": "A_p24_g20",
+      "series": "A",
+      "population_size": 24,
+      "max_generations": 20,
+      "run_ids": [
+        "A_p24_g20_seed11",
+        "A_p24_g20_seed29",
+        "A_p24_g20_seed47"
+      ],
+      "seeds": [
+        11,
+        29,
+        47
+      ],
+      "final_objectives": [
+        125.0,
+        133.0,
+        123.0
+      ],
+      "objective_mean": 127.0,
+      "objective_sample_sd": 5.291502622129181,
+      "duration_mean_seconds": 0.31462133332388476,
+      "duration_sample_sd_seconds": 0.03655787362343046
+    },
+    {
+      "id": "A_p24_g60",
+      "series": "A",
+      "population_size": 24,
+      "max_generations": 60,
+      "run_ids": [
+        "A_p24_g60_seed11",
+        "A_p24_g60_seed29",
+        "A_p24_g60_seed47"
+      ],
+      "seeds": [
+        11,
+        29,
+        47
+      ],
+      "final_objectives": [
+        126.0,
+        133.0,
+        124.0
+      ],
+      "objective_mean": 127.66666666666667,
+      "objective_sample_sd": 4.725815626252609,
+      "duration_mean_seconds": 0.6262498333235271,
+      "duration_sample_sd_seconds": 0.04170222303450149
+    },
+    {
+      "id": "A_p24_g120",
+      "series": "A",
+      "population_size": 24,
+      "max_generations": 120,
+      "run_ids": [
+        "A_p24_g120_seed11",
+        "A_p24_g120_seed29",
+        "A_p24_g120_seed47"
+      ],
+      "seeds": [
+        11,
+        29,
+        47
+      ],
+      "final_objectives": [
+        126.0,
+        133.0,
+        124.0
+      ],
+      "objective_mean": 127.66666666666667,
+      "objective_sample_sd": 4.725815626252609,
+      "duration_mean_seconds": 1.0555716666470591,
+      "duration_sample_sd_seconds": 0.08054235031183805
+    },
+    {
+      "id": "B_p12_g60",
+      "series": "B",
+      "population_size": 12,
+      "max_generations": 60,
+      "run_ids": [
+        "B_p12_g60_seed11",
+        "B_p12_g60_seed29",
+        "B_p12_g60_seed47"
+      ],
+      "seeds": [
+        11,
+        29,
+        47
+      ],
+      "final_objectives": [
+        123.0,
+        130.0,
+        124.0
+      ],
+      "objective_mean": 125.66666666666667,
+      "objective_sample_sd": 3.7859388972001824,
+      "duration_mean_seconds": 0.27875239999654394,
+      "duration_sample_sd_seconds": 0.04990012816064991
+    },
+    {
+      "id": "B_p24_g60",
+      "series": "B",
+      "population_size": 24,
+      "max_generations": 60,
+      "run_ids": [
+        "B_p24_g60_seed11",
+        "B_p24_g60_seed29",
+        "B_p24_g60_seed47"
+      ],
+      "seeds": [
+        11,
+        29,
+        47
+      ],
+      "final_objectives": [
+        126.0,
+        133.0,
+        124.0
+      ],
+      "objective_mean": 127.66666666666667,
+      "objective_sample_sd": 4.725815626252609,
+      "duration_mean_seconds": 0.6274923332966864,
+      "duration_sample_sd_seconds": 0.047098102426421956
+    },
+    {
+      "id": "B_p48_g60",
+      "series": "B",
+      "population_size": 48,
+      "max_generations": 60,
+      "run_ids": [
+        "B_p48_g60_seed11",
+        "B_p48_g60_seed29",
+        "B_p48_g60_seed47"
+      ],
+      "seeds": [
+        11,
+        29,
+        47
+      ],
+      "final_objectives": [
+        130.0,
+        133.0,
+        132.0
+      ],
+      "objective_mean": 131.66666666666666,
+      "objective_sample_sd": 1.5275252316519468,
+      "duration_mean_seconds": 1.059279866691213,
+      "duration_sample_sd_seconds": 0.1594932233167779
+    }
+  ]
+}

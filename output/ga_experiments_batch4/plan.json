@@ -1,0 +1,65 @@
+{
+  "experiment_id": "parthevia_ga_batch4",
+  "input_source": "data/ga_synthetic.json",
+  "input_file": "input.json",
+  "input_sha256": "29af42ca24b73067c6233cd5933ab14ed4c9041c88e59b845c530a3ffad963b6",
+  "dataset_source": "Dataset buatan anggota C untuk eksperimen GA; bukan data resmi kelompok atau spesifikasi.",
+  "objective": "total_value_of_inside_packages",
+  "seeds": [
+    11,
+    29,
+    47
+  ],
+  "configurations": [
+    {
+      "id": "A_p24_g20",
+      "series": "A",
+      "population_size": 24,
+      "max_generations": 20
+    },
+    {
+      "id": "A_p24_g60",
+      "series": "A",
+      "population_size": 24,
+      "max_generations": 60
+    },
+    {
+      "id": "A_p24_g120",
+      "series": "A",
+      "population_size": 24,
+      "max_generations": 120
+    },
+    {
+      "id": "B_p12_g60",
+      "series": "B",
+      "population_size": 12,
+      "max_generations": 60
+    },
+    {
+      "id": "B_p24_g60",
+      "series": "B",
+      "population_size": 24,
+      "max_generations": 60
+    },
+    {
+      "id": "B_p48_g60",
+      "series": "B",
+      "population_size": 48,
+      "max_generations": 60
+    }
+  ],
+  "common_params": {
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.2,
+    "tournament_size": 3,
+    "crossover_attempts": 10,
+    "mutation_attempts": 40,
+    "initial_fill_prob": 0.7,
+    "initial_attempts": 20
+  },
+  "expected_runs": 18,
+  "history_includes_generation_0": true,
+  "selection_rationale": "Pilot terpisah p12/g10 dan p24/g20 selesai sekitar 0.10 dan 0.27 detik. Rentang generasi 20/60/120 dan populasi 12/24/48 memperluas anggaran pencarian dengan waktu wajar; perubahan hasil tidak dijamin. Operator tetap default GA. A_p24_g60 dan B_p24_g60 sengaja diulang terpisah sebagai kontrol kedua rangkaian.",
+  "python_version": "3.13.7",
+  "algorithm_sha256": "885d19f78be93dff5d0c4fab291b3159344e4d295dd56685ed6422fefcf86cc3"
+}

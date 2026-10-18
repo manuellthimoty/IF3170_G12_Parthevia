@@ -1,0 +1,22 @@
+{
+  "dataset_id": "parthevia_ga_synthetic_v1",
+  "source": "Dataset buatan anggota C untuk eksperimen GA; bukan data resmi kelompok atau spesifikasi.",
+  "description": "Total volume dan berat melebihi truk; R perlu rotasi agar muat. Paket pendek dapat ditumpuk, paket fragile tidak boleh menjadi penopang.",
+  "truck": {"dimensions": [5, 3, 3], "maxCapacity": 24},
+  "packages": [
+    {"id": "A", "dimensions": [3, 2, 1], "value": 25, "weight": 6, "ETA": 2},
+    {"id": "B", "dimensions": [2, 2, 1], "value": 18, "weight": 4, "ETA": 3},
+    {"id": "C", "dimensions": [2, 1, 2], "value": 20, "weight": 5, "ETA": 1},
+    {"id": "D", "dimensions": [1, 2, 1], "value": 12, "weight": 2, "ETA": 2},
+    {"id": "E", "dimensions": [2, 2, 2], "value": 30, "weight": 8, "ETA": 4},
+    {"id": "F", "dimensions": [1, 1, 1], "value": 9, "weight": 1, "ETA": 1},
+    {"id": "G", "dimensions": [3, 1, 1], "value": 17, "weight": 3, "isFragile": true, "ETA": 2},
+    {"id": "H", "dimensions": [1, 1, 2], "value": 14, "weight": 2, "isFragile": true, "ETA": 3},
+    {"id": "R", "dimensions": [1, 5, 2], "value": 45, "weight": 7, "ETA": 1},
+    {"id": "J", "dimensions": [2, 3, 1], "value": 24, "weight": 5, "ETA": 2},
+    {"id": "K", "dimensions": [2, 1, 1], "value": 15, "weight": 3, "ETA": 3},
+    {"id": "L", "dimensions": [1, 2, 2], "value": 19, "weight": 4, "ETA": 2},
+    {"id": "M", "dimensions": [3, 2, 2], "value": 35, "weight": 9, "ETA": 4},
+    {"id": "N", "dimensions": [1, 1, 1], "value": 8, "weight": 1, "ETA": 1}
+  ]
+}

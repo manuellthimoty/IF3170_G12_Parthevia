@@ -1,0 +1,14 @@
+{
+  "representative_run_id": "A_p24_g20_seed29",
+  "selection_rule": "Highest final objective across 18 runs; ties use first run in plan order.",
+  "files": [
+    "plots\\A_p24_g20.png",
+    "plots\\A_p24_g60.png",
+    "plots\\A_p24_g120.png",
+    "plots\\B_p12_g60.png",
+    "plots\\B_p24_g60.png",
+    "plots\\B_p48_g60.png",
+    "plots\\representative_best\\objective.png",
+    "plots\\representative_best\\states.png"
+  ]
+}

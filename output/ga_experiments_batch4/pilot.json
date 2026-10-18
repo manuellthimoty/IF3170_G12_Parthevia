@@ -1,0 +1,1304 @@
+{
+  "purpose": "Pilot nyata sebelum penetapan konfigurasi; tidak termasuk 18 run final.",
+  "input": "data/ga_synthetic.json",
+  "runs": [
+    {
+      "algorithm": "genetic_algorithm",
+      "initial_state": {
+        "truck": {
+          "dimensions": {
+            "w": 5,
+            "l": 3,
+            "h": 3
+          },
+          "maxCapacity": 24
+        },
+        "packages": [
+          {
+            "id": "A",
+            "dimensions": {
+              "w": 3,
+              "l": 2,
+              "h": 1
+            },
+            "orientation": [
+              "x",
+              "y",
+              "z"
+            ],
+            "value": 25,
+            "weight": 6,
+            "isFragile": false,
+            "ETA": 2,
+            "position": [
+              2,
+              1,
+              1
+            ]
+          },
+          {
+            "id": "B",
+            "dimensions": {
+              "w": 2,
+              "l": 2,
+              "h": 1
+            },
+            "orientation": [
+              "y",
+              "x",
+              "z"
+            ],
+            "value": 18,
+            "weight": 4,
+            "isFragile": false,
+            "ETA": 3,
+            "position": null
+          },
+          {
+            "id": "C",
+            "dimensions": {
+              "w": 2,
+              "l": 1,
+              "h": 2
+            },
+            "orientation": [
+              "x",
+              "z",
+              "y"
+            ],
+            "value": 20,
+            "weight": 5,
+            "isFragile": false,
+            "ETA": 1,
+            "position": null
+          },
+          {
+            "id": "D",
+            "dimensions": {
+              "w": 1,
+              "l": 2,
+              "h": 1
+            },
+            "orientation": [
+              "y",
+              "z",
+              "x"
+            ],
+            "value": 12,
+            "weight": 2,
+            "isFragile": false,
+            "ETA": 2,
+            "position": [
+              1,
+              1,
+              0
+            ]
+          },
+          {
+            "id": "E",
+            "dimensions": {
+              "w": 2,
+              "l": 2,
+              "h": 2
+            },
+            "orientation": [
+              "x",
+              "z",
+              "y"
+            ],
+            "value": 30,
+            "weight": 8,
+            "isFragile": false,
+            "ETA": 4,
+            "position": null
+          },
+          {
+            "id": "F",
+            "dimensions": {
+              "w": 1,
+              "l": 1,
+              "h": 1
+            },
+            "orientation": [
+              "y",
+              "z",
+              "x"
+            ],
+            "value": 9,
+            "weight": 1,
+            "isFragile": false,
+            "ETA": 1,
+            "position": [
+              3,
+              0,
+              1
+            ]
+          },
+          {
+            "id": "G",
+            "dimensions": {
+              "w": 3,
+              "l": 1,
+              "h": 1
+            },
+            "orientation": [
+              "x",
+              "y",
+              "z"
+            ],
+            "value": 17,
+            "weight": 3,
+            "isFragile": true,
+            "ETA": 2,
+            "position": [
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "id": "H",
+            "dimensions": {
+              "w": 1,
+              "l": 1,
+              "h": 2
+            },
+            "orientation": [
+              "y",
+              "z",
+              "x"
+            ],
+            "value": 14,
+            "weight": 2,
+            "isFragile": true,
+            "ETA": 3,
+            "position": [
+              3,
+              0,
+              2
+            ]
+          },
+          {
+            "id": "R",
+            "dimensions": {
+              "w": 1,
+              "l": 5,
+              "h": 2
+            },
+            "orientation": [
+              "y",
+              "z",
+              "x"
+            ],
+            "value": 45,
+            "weight": 7,
+            "isFragile": false,
+            "ETA": 1,
+            "position": null
+          },
+          {
+            "id": "J",
+            "dimensions": {
+              "w": 2,
+              "l": 3,
+              "h": 1
+            },
+            "orientation": [
+              "x",
+              "y",
+              "z"
+            ],
+            "value": 24,
+            "weight": 5,
+            "isFragile": false,
+            "ETA": 2,
+            "position": [
+              2,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "K",
+            "dimensions": {
+              "w": 2,
+              "l": 1,
+              "h": 1
+            },
+            "orientation": [
+              "y",
+              "x",
+              "z"
+            ],
+            "value": 15,
+            "weight": 3,
+            "isFragile": false,
+            "ETA": 3,
+            "position": null
+          },
+          {
+            "id": "L",
+            "dimensions": {
+              "w": 1,
+              "l": 2,
+              "h": 2
+            },
+            "orientation": [
+              "y",
+              "x",
+              "z"
+            ],
+            "value": 19,
+            "weight": 4,
+            "isFragile": false,
+            "ETA": 2,
+            "position": [
+              0,
+              2,
+              1
+            ]
+          },
+          {
+            "id": "M",
+            "dimensions": {
+              "w": 3,
+              "l": 2,
+              "h": 2
+            },
+            "orientation": [
+              "x",
+              "z",
+              "y"
+            ],
+            "value": 35,
+            "weight": 9,
+            "isFragile": false,
+            "ETA": 4,
+            "position": null
+          },
+          {
+            "id": "N",
+            "dimensions": {
+              "w": 1,
+              "l": 1,
+              "h": 1
+            },
+            "orientation": [
+              "z",
+              "x",
+              "y"
+            ],
+            "value": 8,
+            "weight": 1,
+            "isFragile": false,
+            "ETA": 1,
+            "position": [
+              1,
+              2,
+              0
+            ]
+          }
+        ]
+      },
+      "final_state": {
+        "truck": {
+          "dimensions": {
+            "w": 5,
+            "l": 3,
+            "h": 3
+          },
+          "maxCapacity": 24
+        },
+        "packages": [
+          {
+            "id": "A",
+            "dimensions": {
+              "w": 3,
+              "l": 2,
+              "h": 1
+            },
+            "orientation": [
+              "x",
+              "y",
+              "z"
+            ],
+            "value": 25,
+            "weight": 6,
+            "isFragile": false,
+            "ETA": 2,
+            "position": [
+              2,
+              1,
+              1
+            ]
+          },
+          {
+            "id": "B",
+            "dimensions": {
+              "w": 2,
+              "l": 2,
+              "h": 1
+            },
+            "orientation": [
+              "y",
+              "x",
+              "z"
+            ],
+            "value": 18,
+            "weight": 4,
+            "isFragile": false,
+            "ETA": 3,
+            "position": null
+          },
+          {
+            "id": "C",
+            "dimensions": {
+              "w": 2,
+              "l": 1,
+              "h": 2
+            },
+            "orientation": [
+              "x",
+              "z",
+              "y"
+            ],
+            "value": 20,
+            "weight": 5,
+            "isFragile": false,
+            "ETA": 1,
+            "position": null
+          },
+          {
+            "id": "D",
+            "dimensions": {
+              "w": 1,
+              "l": 2,
+              "h": 1
+            },
+            "orientation": [
+              "y",
+              "z",
+              "x"
+            ],
+            "value": 12,
+            "weight": 2,
+            "isFragile": false,
+            "ETA": 2,
+            "position": [
+              1,
+              1,
+              0
+            ]
+          },
+          {
+            "id": "E",
+            "dimensions": {
+              "w": 2,
+              "l": 2,
+              "h": 2
+            },
+            "orientation": [
+              "x",
+              "z",
+              "y"
+            ],
+            "value": 30,
+            "weight": 8,
+            "isFragile": false,
+            "ETA": 4,
+            "position": null
+          },
+          {
+            "id": "F",
+            "dimensions": {
+              "w": 1,
+              "l": 1,
+              "h": 1
+            },
+            "orientation": [
+              "y",
+              "z",
+              "x"
+            ],
+            "value": 9,
+            "weight": 1,
+            "isFragile": false,
+            "ETA": 1,
+            "position": [
+              3,
+              0,
+              1
+            ]
+          },
+          {
+            "id": "G",
+            "dimensions": {
+              "w": 3,
+              "l": 1,
+              "h": 1
+            },
+            "orientation": [
+              "x",
+              "y",
+              "z"
+            ],
+            "value": 17,
+            "weight": 3,
+            "isFragile": true,
+            "ETA": 2,
+            "position": [
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "id": "H",
+            "dimensions": {
+              "w": 1,
+              "l": 1,
+              "h": 2
+            },
+            "orientation": [
+              "y",
+              "z",
+              "x"
+            ],
+            "value": 14,
+            "weight": 2,
+            "isFragile": true,
+            "ETA": 3,
+            "position": [
+              3,
+              0,
+              2
+            ]
+          },
+          {
+            "id": "R",
+            "dimensions": {
+              "w": 1,
+              "l": 5,
+              "h": 2
+            },
+            "orientation": [
+              "y",
+              "z",
+              "x"
+            ],
+            "value": 45,
+            "weight": 7,
+            "isFragile": false,
+            "ETA": 1,
+            "position": null
+          },
+          {
+            "id": "J",
+            "dimensions": {
+              "w": 2,
+              "l": 3,
+              "h": 1
+            },
+            "orientation": [
+              "x",
+              "y",
+              "z"
+            ],
+            "value": 24,
+            "weight": 5,
+            "isFragile": false,
+            "ETA": 2,
+            "position": [
+              2,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "K",
+            "dimensions": {
+              "w": 2,
+              "l": 1,
+              "h": 1
+            },
+            "orientation": [
+              "y",
+              "x",
+              "z"
+            ],
+            "value": 15,
+            "weight": 3,
+            "isFragile": false,
+            "ETA": 3,
+            "position": null
+          },
+          {
+            "id": "L",
+            "dimensions": {
+              "w": 1,
+              "l": 2,
+              "h": 2
+            },
+            "orientation": [
+              "y",
+              "x",
+              "z"
+            ],
+            "value": 19,
+            "weight": 4,
+            "isFragile": false,
+            "ETA": 2,
+            "position": [
+              0,
+              2,
+              1
+            ]
+          },
+          {
+            "id": "M",
+            "dimensions": {
+              "w": 3,
+              "l": 2,
+              "h": 2
+            },
+            "orientation": [
+              "x",
+              "z",
+              "y"
+            ],
+            "value": 35,
+            "weight": 9,
+            "isFragile": false,
+            "ETA": 4,
+            "position": null
+          },
+          {
+            "id": "N",
+            "dimensions": {
+              "w": 1,
+              "l": 1,
+              "h": 1
+            },
+            "orientation": [
+              "z",
+              "x",
+              "y"
+            ],
+            "value": 8,
+            "weight": 1,
+            "isFragile": false,
+            "ETA": 1,
+            "position": [
+              1,
+              2,
+              0
+            ]
+          }
+        ]
+      },
+      "initial_objective": 128.0,
+      "final_objective": 128.0,
+      "iterations": 10,
+      "history": [
+        128.0,
+        128.0,
+        128.0,
+        128.0,
+        128.0,
+        128.0,
+        128.0,
+        128.0,
+        128.0,
+        128.0,
+        128.0
+      ],
+      "params": {
+        "population_size": 12,
+        "max_generations": 10,
+        "crossover_rate": 0.8,
+        "mutation_rate": 0.2,
+        "tournament_size": 3,
+        "elite_count": 1,
+        "crossover_attempts": 10,
+        "mutation_attempts": 40,
+        "initial_fill_prob": 0.7,
+        "initial_attempts": 20,
+        "seed": 2026,
+        "rng_state": null,
+        "initial_selection": "first_max_fitness_generation_0"
+      },
+      "extra": {
+        "mean_history": [
+          106.91666666666667,
+          101.16666666666667,
+          112.25,
+          128.0,
+          128.0,
+          128.0,
+          126.58333333333333,
+          128.0,
+          128.0,
+          128.0,
+          128.0
+        ],
+        "history_includes_generation_0": true,
+        "duration_seconds": 0.10076629999093711
+      }
+    },
+    {
+      "algorithm": "genetic_algorithm",
+      "initial_state": {
+        "truck": {
+          "dimensions": {
+            "w": 5,
+            "l": 3,
+            "h": 3
+          },
+          "maxCapacity": 24
+        },
+        "packages": [
+          {
+            "id": "A",
+            "dimensions": {
+              "w": 3,
+              "l": 2,
+              "h": 1
+            },
+            "orientation": [
+              "z",
+              "x",
+              "y"
+            ],
+            "value": 25,
+            "weight": 6,
+            "isFragile": false,
+            "ETA": 2,
+            "position": null
+          },
+          {
+            "id": "B",
+            "dimensions": {
+              "w": 2,
+              "l": 2,
+              "h": 1
+            },
+            "orientation": [
+              "z",
+              "x",
+              "y"
+            ],
+            "value": 18,
+            "weight": 4,
+            "isFragile": false,
+            "ETA": 3,
+            "position": [
+              2,
+              2,
+              1
+            ]
+          },
+          {
+            "id": "C",
+            "dimensions": {
+              "w": 2,
+              "l": 1,
+              "h": 2
+            },
+            "orientation": [
+              "x",
+              "z",
+              "y"
+            ],
+            "value": 20,
+            "weight": 5,
+            "isFragile": false,
+            "ETA": 1,
+            "position": null
+          },
+          {
+            "id": "D",
+            "dimensions": {
+              "w": 1,
+              "l": 2,
+              "h": 1
+            },
+            "orientation": [
+              "z",
+              "x",
+              "y"
+            ],
+            "value": 12,
+            "weight": 2,
+            "isFragile": false,
+            "ETA": 2,
+            "position": null
+          },
+          {
+            "id": "E",
+            "dimensions": {
+              "w": 2,
+              "l": 2,
+              "h": 2
+            },
+            "orientation": [
+              "x",
+              "y",
+              "z"
+            ],
+            "value": 30,
+            "weight": 8,
+            "isFragile": false,
+            "ETA": 4,
+            "position": null
+          },
+          {
+            "id": "F",
+            "dimensions": {
+              "w": 1,
+              "l": 1,
+              "h": 1
+            },
+            "orientation": [
+              "z",
+              "x",
+              "y"
+            ],
+            "value": 9,
+            "weight": 1,
+            "isFragile": false,
+            "ETA": 1,
+            "position": null
+          },
+          {
+            "id": "G",
+            "dimensions": {
+              "w": 3,
+              "l": 1,
+              "h": 1
+            },
+            "orientation": [
+              "x",
+              "y",
+              "z"
+            ],
+            "value": 17,
+            "weight": 3,
+            "isFragile": true,
+            "ETA": 2,
+            "position": [
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "H",
+            "dimensions": {
+              "w": 1,
+              "l": 1,
+              "h": 2
+            },
+            "orientation": [
+              "y",
+              "z",
+              "x"
+            ],
+            "value": 14,
+            "weight": 2,
+            "isFragile": true,
+            "ETA": 3,
+            "position": [
+              2,
+              1,
+              1
+            ]
+          },
+          {
+            "id": "R",
+            "dimensions": {
+              "w": 1,
+              "l": 5,
+              "h": 2
+            },
+            "orientation": [
+              "z",
+              "x",
+              "y"
+            ],
+            "value": 45,
+            "weight": 7,
+            "isFragile": false,
+            "ETA": 1,
+            "position": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "id": "J",
+            "dimensions": {
+              "w": 2,
+              "l": 3,
+              "h": 1
+            },
+            "orientation": [
+              "x",
+              "y",
+              "z"
+            ],
+            "value": 24,
+            "weight": 5,
+            "isFragile": false,
+            "ETA": 2,
+            "position": null
+          },
+          {
+            "id": "K",
+            "dimensions": {
+              "w": 2,
+              "l": 1,
+              "h": 1
+            },
+            "orientation": [
+              "z",
+              "x",
+              "y"
+            ],
+            "value": 15,
+            "weight": 3,
+            "isFragile": false,
+            "ETA": 3,
+            "position": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "id": "L",
+            "dimensions": {
+              "w": 1,
+              "l": 2,
+              "h": 2
+            },
+            "orientation": [
+              "x",
+              "y",
+              "z"
+            ],
+            "value": 19,
+            "weight": 4,
+            "isFragile": false,
+            "ETA": 2,
+            "position": [
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "id": "M",
+            "dimensions": {
+              "w": 3,
+              "l": 2,
+              "h": 2
+            },
+            "orientation": [
+              "y",
+              "x",
+              "z"
+            ],
+            "value": 35,
+            "weight": 9,
+            "isFragile": false,
+            "ETA": 4,
+            "position": null
+          },
+          {
+            "id": "N",
+            "dimensions": {
+              "w": 1,
+              "l": 1,
+              "h": 1
+            },
+            "orientation": [
+              "z",
+              "x",
+              "y"
+            ],
+            "value": 8,
+            "weight": 1,
+            "isFragile": false,
+            "ETA": 1,
+            "position": [
+              4,
+              2,
+              1
+            ]
+          }
+        ]
+      },
+      "final_state": {
+        "truck": {
+          "dimensions": {
+            "w": 5,
+            "l": 3,
+            "h": 3
+          },
+          "maxCapacity": 24
+        },
+        "packages": [
+          {
+            "id": "A",
+            "dimensions": {
+              "w": 3,
+              "l": 2,
+              "h": 1
+            },
+            "orientation": [
+              "z",
+              "y",
+              "x"
+            ],
+            "value": 25,
+            "weight": 6,
+            "isFragile": false,
+            "ETA": 2,
+            "position": null
+          },
+          {
+            "id": "B",
+            "dimensions": {
+              "w": 2,
+              "l": 2,
+              "h": 1
+            },
+            "orientation": [
+              "z",
+              "x",
+              "y"
+            ],
+            "value": 18,
+            "weight": 4,
+            "isFragile": false,
+            "ETA": 3,
+            "position": [
+              2,
+              2,
+              1
+            ]
+          },
+          {
+            "id": "C",
+            "dimensions": {
+              "w": 2,
+              "l": 1,
+              "h": 2
+            },
+            "orientation": [
+              "x",
+              "z",
+              "y"
+            ],
+            "value": 20,
+            "weight": 5,
+            "isFragile": false,
+            "ETA": 1,
+            "position": null
+          },
+          {
+            "id": "D",
+            "dimensions": {
+              "w": 1,
+              "l": 2,
+              "h": 1
+            },
+            "orientation": [
+              "z",
+              "x",
+              "y"
+            ],
+            "value": 12,
+            "weight": 2,
+            "isFragile": false,
+            "ETA": 2,
+            "position": null
+          },
+          {
+            "id": "E",
+            "dimensions": {
+              "w": 2,
+              "l": 2,
+              "h": 2
+            },
+            "orientation": [
+              "x",
+              "y",
+              "z"
+            ],
+            "value": 30,
+            "weight": 8,
+            "isFragile": false,
+            "ETA": 4,
+            "position": null
+          },
+          {
+            "id": "F",
+            "dimensions": {
+              "w": 1,
+              "l": 1,
+              "h": 1
+            },
+            "orientation": [
+              "z",
+              "x",
+              "y"
+            ],
+            "value": 9,
+            "weight": 1,
+            "isFragile": false,
+            "ETA": 1,
+            "position": [
+              4,
+              2,
+              1
+            ]
+          },
+          {
+            "id": "G",
+            "dimensions": {
+              "w": 3,
+              "l": 1,
+              "h": 1
+            },
+            "orientation": [
+              "x",
+              "y",
+              "z"
+            ],
+            "value": 17,
+            "weight": 3,
+            "isFragile": true,
+            "ETA": 2,
+            "position": [
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "H",
+            "dimensions": {
+              "w": 1,
+              "l": 1,
+              "h": 2
+            },
+            "orientation": [
+              "y",
+              "z",
+              "x"
+            ],
+            "value": 14,
+            "weight": 2,
+            "isFragile": true,
+            "ETA": 3,
+            "position": [
+              2,
+              1,
+              1
+            ]
+          },
+          {
+            "id": "R",
+            "dimensions": {
+              "w": 1,
+              "l": 5,
+              "h": 2
+            },
+            "orientation": [
+              "z",
+              "x",
+              "y"
+            ],
+            "value": 45,
+            "weight": 7,
+            "isFragile": false,
+            "ETA": 1,
+            "position": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "id": "J",
+            "dimensions": {
+              "w": 2,
+              "l": 3,
+              "h": 1
+            },
+            "orientation": [
+              "y",
+              "x",
+              "z"
+            ],
+            "value": 24,
+            "weight": 5,
+            "isFragile": false,
+            "ETA": 2,
+            "position": null
+          },
+          {
+            "id": "K",
+            "dimensions": {
+              "w": 2,
+              "l": 1,
+              "h": 1
+            },
+            "orientation": [
+              "z",
+              "x",
+              "y"
+            ],
+            "value": 15,
+            "weight": 3,
+            "isFragile": false,
+            "ETA": 3,
+            "position": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "id": "L",
+            "dimensions": {
+              "w": 1,
+              "l": 2,
+              "h": 2
+            },
+            "orientation": [
+              "x",
+              "y",
+              "z"
+            ],
+            "value": 19,
+            "weight": 4,
+            "isFragile": false,
+            "ETA": 2,
+            "position": [
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "id": "M",
+            "dimensions": {
+              "w": 3,
+              "l": 2,
+              "h": 2
+            },
+            "orientation": [
+              "y",
+              "x",
+              "z"
+            ],
+            "value": 35,
+            "weight": 9,
+            "isFragile": false,
+            "ETA": 4,
+            "position": null
+          },
+          {
+            "id": "N",
+            "dimensions": {
+              "w": 1,
+              "l": 1,
+              "h": 1
+            },
+            "orientation": [
+              "z",
+              "x",
+              "y"
+            ],
+            "value": 8,
+            "weight": 1,
+            "isFragile": false,
+            "ETA": 1,
+            "position": null
+          }
+        ]
+      },
+      "initial_objective": 136.0,
+      "final_objective": 137.0,
+      "iterations": 20,
+      "history": [
+        136.0,
+        136.0,
+        136.0,
+        136.0,
+        136.0,
+        136.0,
+        136.0,
+        136.0,
+        136.0,
+        136.0,
+        137.0,
+        137.0,
+        137.0,
+        137.0,
+        137.0,
+        137.0,
+        137.0,
+        137.0,
+        137.0,
+        137.0,
+        137.0
+      ],
+      "params": {
+        "population_size": 24,
+        "max_generations": 20,
+        "crossover_rate": 0.8,
+        "mutation_rate": 0.2,
+        "tournament_size": 3,
+        "elite_count": 1,
+        "crossover_attempts": 10,
+        "mutation_attempts": 40,
+        "initial_fill_prob": 0.7,
+        "initial_attempts": 20,
+        "seed": 2027,
+        "rng_state": null,
+        "initial_selection": "first_max_fitness_generation_0"
+      },
+      "extra": {
+        "mean_history": [
+          111.41666666666667,
+          113.25,
+          121.16666666666667,
+          133.20833333333334,
+          135.66666666666666,
+          135.54166666666666,
+          136.0,
+          135.375,
+          135.75,
+          136.0,
+          136.04166666666666,
+          135.5,
+          135.91666666666666,
+          136.70833333333334,
+          136.45833333333334,
+          136.70833333333334,
+          137.0,
+          136.33333333333334,
+          137.0,
+          137.0,
+          137.0
+        ],
+        "history_includes_generation_0": true,
+        "duration_seconds": 0.2732032999629155
+      }
+    }
+  ]
+}

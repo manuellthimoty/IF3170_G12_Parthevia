@@ -5,3 +5,8 @@ __pycache__/
 build/
 dist/
 *.egg-info/
+/tests/
+/src/parthevia/visualization_example.py
+/output/visualization/
+/output/plotting/smoke/
+
