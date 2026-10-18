@@ -33,7 +33,8 @@ class Batch1Tests(unittest.TestCase):
         plt.close("all")
 
     def test_algorithm_imports_and_result_contract(self) -> None:
-        self.assertEqual(len(ALGORITHMS), 5)
+        self.assertTrue({"sa", "stochastic-hc", "random-restart-hc",
+                         "steepest-ascent-hc", "sideways-hc"}.issubset(ALGORITHMS))
         state = State(Truck([2, 2, 2], 10), [Package("P", [1, 1, 1], value=3, weight=1)])
         before = state.to_dict()
         results = [
