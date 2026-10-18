@@ -20,7 +20,6 @@ class SearchResult:
 
     def to_dict(self) -> dict[str, Any]:
         params = dict(self.params)
-        # Random Restart menyimpan fungsi inner; JSON hanya menyimpan namanya.
         if callable(params.get("inner")):
             inner = params["inner"]
             params["inner"] = getattr(inner, "__name__", type(inner).__name__)

@@ -1,0 +1,167 @@
+{
+  "algorithm": "genetic_algorithm",
+  "initial_state": {
+    "truck": {
+      "dimensions": {
+        "w": 2,
+        "l": 1,
+        "h": 1
+      },
+      "maxCapacity": 2
+    },
+    "packages": [
+      {
+        "id": "URGENT",
+        "dimensions": {
+          "w": 1,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "z",
+          "y",
+          "x"
+        ],
+        "value": 12,
+        "weight": 2,
+        "isFragile": false,
+        "ETA": 0,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "LATER",
+        "dimensions": {
+          "w": 1,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "y",
+          "x",
+          "z"
+        ],
+        "value": 30,
+        "weight": 2,
+        "isFragile": false,
+        "ETA": 5,
+        "position": null
+      }
+    ]
+  },
+  "final_state": {
+    "truck": {
+      "dimensions": {
+        "w": 2,
+        "l": 1,
+        "h": 1
+      },
+      "maxCapacity": 2
+    },
+    "packages": [
+      {
+        "id": "URGENT",
+        "dimensions": {
+          "w": 1,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "z",
+          "y",
+          "x"
+        ],
+        "value": 12,
+        "weight": 2,
+        "isFragile": false,
+        "ETA": 0,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "LATER",
+        "dimensions": {
+          "w": 1,
+          "l": 1,
+          "h": 1
+        },
+        "orientation": [
+          "y",
+          "x",
+          "z"
+        ],
+        "value": 30,
+        "weight": 2,
+        "isFragile": false,
+        "ETA": 5,
+        "position": null
+      }
+    ]
+  },
+  "initial_objective": 12.0,
+  "final_objective": 12.0,
+  "iterations": 12,
+  "history": [
+    12.0,
+    12.0,
+    12.0,
+    12.0,
+    12.0,
+    12.0,
+    12.0,
+    12.0,
+    12.0,
+    12.0,
+    12.0,
+    12.0,
+    12.0
+  ],
+  "params": {
+    "population_size": 12,
+    "max_generations": 12,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.2,
+    "tournament_size": 3,
+    "elite_count": 1,
+    "crossover_attempts": 10,
+    "mutation_attempts": 40,
+    "initial_fill_prob": 0.7,
+    "initial_attempts": 20,
+    "seed": 17,
+    "rng_state": null,
+    "initial_selection": "first_max_fitness_generation_0",
+    "objective_name": "eta_priority"
+  },
+  "extra": {
+    "mean_history": [
+      6.916666666666667,
+      8.416666666666666,
+      11.416666666666666,
+      11.0,
+      11.416666666666666,
+      11.416666666666666,
+      11.0,
+      11.416666666666666,
+      12.0,
+      10.833333333333334,
+      11.416666666666666,
+      11.416666666666666,
+      12.0
+    ],
+    "history_includes_generation_0": true,
+    "duration_seconds": 0.004943499981891364,
+    "initial_total_value": 12,
+    "final_total_value": 12
+  },
+  "demonstration": {
+    "input_file": "input.json",
+    "input_source": "data/eta_demo.json",
+    "purpose": "Small real run showing the objective trade-off; not a full experiment."
+  }
+}

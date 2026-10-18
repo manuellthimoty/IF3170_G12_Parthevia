@@ -1,0 +1,37 @@
+{
+  "dataset_id": "parthevia_eta_toy_v1",
+  "source": "Dataset buatan untuk demonstrasi trade-off objective ETA, bukan dataset resmi atau eksperimen final.",
+  "description": "Kapasitas hanya cukup untuk salah satu paket. Paket mahal memiliki ETA lebih lama.",
+  "truck": {
+    "dimensions": [
+      2,
+      1,
+      1
+    ],
+    "maxCapacity": 2
+  },
+  "packages": [
+    {
+      "id": "URGENT",
+      "dimensions": [
+        1,
+        1,
+        1
+      ],
+      "value": 12,
+      "weight": 2,
+      "ETA": 0
+    },
+    {
+      "id": "LATER",
+      "dimensions": [
+        1,
+        1,
+        1
+      ],
+      "value": 30,
+      "weight": 2,
+      "ETA": 5
+    }
+  ]
+}

@@ -12,7 +12,8 @@ import matplotlib.pyplot as plt
 
 from .algorithms import genetic_algorithm
 from .io import load_json, load_problem_data, save_json, state_from_dict
-from .model import ConstraintChecker, State, objective
+from .model import ConstraintChecker, State
+from .objectives import OBJECTIVES, get_objective
 from .plotting import plot_run_comparison, plot_saved_result
 
 SEEDS = (11, 29, 47)
@@ -30,20 +31,24 @@ COMMON_PARAMS = {
 }
 
 
-def run_ga_experiments(input_path: str | Path, output_dir: str | Path) -> dict[str, Any]:
-    """Run only the fixed GA experiment matrix; existing results are never overwritten."""
+def run_ga_experiments(input_path: str | Path, output_dir: str | Path,
+                       objective_name: str = "total_value") -> dict[str, Any]:
     destination = Path(output_dir)
     if any((destination / name).exists() for name in ("plan.json", "input.json", "runs")):
         raise FileExistsError("experiment output already exists; choose a new output directory")
     input_data = load_json(input_path)
     truck, packages = load_problem_data(input_data)
+    score = get_objective(objective_name)
+    outside = State(truck, [package.with_position(None) for package in packages])
+    score(outside, ConstraintChecker(truck))
     save_json(input_data, destination / "input.json")
     input_hash = sha256((destination / "input.json").read_bytes()).hexdigest()
     plan = {
         "experiment_id": "parthevia_ga_batch4",
         "input_source": str(input_path), "input_file": "input.json", "input_sha256": input_hash,
         "dataset_source": input_data.get("source", "Source not specified by input file"),
-        "objective": "total_value_of_inside_packages",
+        "objective": "total_value_of_inside_packages" if objective_name == "total_value" else objective_name,
+        "objective_name": objective_name,
         "seeds": list(SEEDS), "configurations": CONFIGURATIONS, "common_params": COMMON_PARAMS,
         "expected_runs": len(CONFIGURATIONS) * len(SEEDS),
         "history_includes_generation_0": True,
@@ -56,14 +61,14 @@ def run_ga_experiments(input_path: str | Path, output_dir: str | Path) -> dict[s
         "python_version": platform.python_version(),
         "algorithm_sha256": sha256((Path(__file__).parent / "algorithms/genetic_algorithm.py").read_bytes()).hexdigest(),
     }
-    # Simpan rencana sebelum run pertama agar konfigurasi tidak dipilih dari hasil akhir.
     save_json(plan, destination / "plan.json")
     template = State(truck, packages)
     for config in CONFIGURATIONS:
         for repeat, seed in enumerate(SEEDS, 1):
             run_id = f"{config['id']}_seed{seed}"
             result = genetic_algorithm(template, population_size=config["population_size"],
-                                       max_generations=config["max_generations"], seed=seed, **COMMON_PARAMS)
+                                       max_generations=config["max_generations"], seed=seed,
+                                       objective_name=objective_name, **COMMON_PARAMS)
             data = result.to_dict()
             data["experiment"] = {
                 "run_id": run_id, "configuration_id": config["id"], "series": config["series"],
@@ -79,9 +84,10 @@ def run_ga_experiments(input_path: str | Path, output_dir: str | Path) -> dict[s
 
 
 def verify_ga_experiments(output_dir: str | Path) -> list[dict[str, Any]]:
-    """Read saved results, validate states and recorded statistics without rerunning GA."""
     root = Path(output_dir)
     plan = load_json(root / "plan.json")
+    objective_name = plan.get("objective_name", "total_value")
+    score = get_objective(objective_name)
     input_hash = sha256((root / plan["input_file"]).read_bytes()).hexdigest()
     if input_hash != plan["input_sha256"]:
         raise ValueError("input snapshot hash does not match plan")
@@ -105,6 +111,8 @@ def verify_ga_experiments(output_dir: str | Path) -> list[dict[str, Any]]:
             }
             expected_params = dict(plan["common_params"], population_size=config["population_size"],
                                    max_generations=config["max_generations"], seed=seed, elite_count=1)
+            if "objective_name" in plan:
+                expected_params["objective_name"] = objective_name
             if (data["algorithm"] != "genetic_algorithm"
                     or any(metadata.get(key) != value for key, value in expected_metadata.items())
                     or any(data["params"].get(key) != value for key, value in expected_params.items())):
@@ -123,8 +131,12 @@ def verify_ga_experiments(output_dir: str | Path) -> list[dict[str, Any]]:
                     if (package.dims, package.value, package.weight, package.is_fragile, package.eta) != (
                             original.dims, original.value, original.weight, original.is_fragile, original.eta):
                         raise ValueError(f"{run_id}: package attributes changed")
-                if not isclose(objective(state, checker), data[value_key]):
+                if not isclose(score(state, checker), data[value_key]):
                     raise ValueError(f"{run_id}: objective does not match {key}")
+                total_key = "initial_total_value" if key == "initial_state" else "final_total_value"
+                if (total_key in data["extra"] and not isclose(state.total_value, data["extra"][total_key])
+                        or objective_name != "total_value" and total_key not in data["extra"]):
+                    raise ValueError(f"{run_id}: missing or incorrect original total value")
             maximum, average = data["history"], data["extra"]["mean_history"]
             duration = data["extra"]["duration_seconds"]
             if (len(maximum) != actual + 1 or len(average) != len(maximum)
@@ -148,13 +160,16 @@ def summarize_ga_experiments(output_dir: str | Path) -> dict[str, Any]:
         runs = [data for data in records if data["experiment"]["configuration_id"] == config["id"]]
         objectives = [data["final_objective"] for data in runs]
         durations = [data["extra"]["duration_seconds"] for data in runs]
+        totals = [state_from_dict(data["final_state"]).total_value for data in runs]
         rows.append(dict(config, run_ids=[data["experiment"]["run_id"] for data in runs],
                          seeds=[data["params"]["seed"] for data in runs],
                          final_objectives=objectives, objective_mean=mean(objectives),
                          objective_sample_sd=stdev(objectives), duration_mean_seconds=mean(durations),
-                         duration_sample_sd_seconds=stdev(durations)))
+                         duration_sample_sd_seconds=stdev(durations), final_total_values=totals,
+                         total_value_mean=mean(totals)))
     summary = {
         "run_count": len(records),
+        "objective_name": load_json(root / "plan.json").get("objective_name", "total_value"),
         "completed_as_planned": sum(data["experiment"]["completed_as_planned"] for data in records),
         "variation_measure": "sample standard deviation, denominator n - 1, n = 3 per configuration",
         "verification": "All saved initial/final states, IDs, objectives, seeds, parameters and history lengths checked.",
@@ -165,7 +180,6 @@ def summarize_ga_experiments(output_dir: str | Path) -> dict[str, Any]:
 
 
 def plot_ga_experiments(output_dir: str | Path) -> dict[str, Any]:
-    """Export six run comparisons and one representative maximum/mean + state pair."""
     root = Path(output_dir)
     records = verify_ga_experiments(root)
     files = []
@@ -196,9 +210,10 @@ def main() -> None:
     parser.add_argument("--input", default="data/ga_synthetic.json")
     parser.add_argument("--output", default="output/ga_experiments_batch4")
     parser.add_argument("--mode", choices=("run", "verify", "plot"), default="run")
+    parser.add_argument("--objective", choices=tuple(OBJECTIVES), default="total_value")
     args = parser.parse_args()
     if args.mode == "run":
-        summary = run_ga_experiments(args.input, args.output)
+        summary = run_ga_experiments(args.input, args.output, objective_name=args.objective)
         plot_ga_experiments(args.output)
         print(f"Verified {summary['run_count']} runs; {summary['completed_as_planned']} completed as planned.")
     elif args.mode == "verify":

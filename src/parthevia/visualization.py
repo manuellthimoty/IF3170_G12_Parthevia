@@ -22,7 +22,6 @@ def package_colors(*states: State) -> dict[str, Color]:
 
 
 def _draw_state(ax: Axes3D, state: State, colors: Mapping[str, Color], limits: Sequence[int]) -> None:
-    # Gambar hanya 12 rusuk peti kemas, tanpa enumerasi sel di dalamnya.
     corners = list(itertools.product(*((0, size) for size in state.truck.effective_dimensions)))
     for first, second in itertools.combinations(corners, 2):
         if sum(a != b for a, b in zip(first, second)) == 1:
@@ -93,12 +92,10 @@ def _plot_states(states: Sequence[State], titles: Sequence[str], path: str | Pat
 
 def plot_state(state: State, path: str | Path | None = None, title: str = "State",
                colors: Mapping[str, Color] | None = None) -> Figure:
-    """Return a figure without changing state; the caller closes the figure."""
     return _plot_states((state,), (title,), path, colors)
 
 
 def plot_state_comparison(initial_state: State, final_state: State,
                           path: str | Path | None = None,
                           colors: Mapping[str, Color] | None = None) -> Figure:
-    """Compare states with shared axis limits, box aspect, view and package colors."""
     return _plot_states((initial_state, final_state), ("Initial state", "Final state"), path, colors)

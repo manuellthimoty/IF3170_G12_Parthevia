@@ -10,6 +10,7 @@ from matplotlib.figure import Figure
 from matplotlib.ticker import MaxNLocator
 
 from .io import load_json, state_from_dict
+from .objectives import OBJECTIVE_LABELS
 from .visualization import plot_state_comparison
 
 TITLES = {
@@ -35,6 +36,13 @@ def _series(values: Any, name: str) -> list[float]:
            for value in values):
         raise ValueError(f"{name} must contain finite numbers")
     return list(values)
+
+
+def _objective_name(data: Mapping[str, Any]) -> str:
+    name = data.get("params", {}).get("objective_name", "total_value")
+    if name not in OBJECTIVE_LABELS:
+        raise ValueError(f"unsupported plot objective: {name}")
+    return name
 
 
 def _segments(data: Mapping[str, Any]) -> list[tuple[list[int], list[float]]]:
@@ -94,7 +102,6 @@ def _finish(fig: Figure, ax: Axes, path: str | Path | None) -> Figure:
 
 
 def plot_objective(data: Mapping[str, Any], path: str | Path | None = None) -> Figure:
-    """Plot recorded values at their original iteration or generation indices."""
     algorithm = _algorithm(data)
     segments = _segments(data)
     extra = data.get("extra", {})
@@ -107,7 +114,11 @@ def plot_objective(data: Mapping[str, Any], path: str | Path | None = None) -> F
     if secondary is not None and len(secondary) != len(history):
         raise ValueError("secondary history length must match history")
 
-    fig, ax = _new_plot(TITLES[algorithm] + " - objective", _xlabel(algorithm), "Objective (total value)")
+    objective_name = _objective_name(data)
+    title = TITLES[algorithm] + " - objective"
+    if objective_name != "total_value":
+        title += f" ({objective_name})"
+    fig, ax = _new_plot(title, _xlabel(algorithm), OBJECTIVE_LABELS[objective_name])
     if algorithm == "random_restart_hill_climbing":
         for index, (x, values) in enumerate(segments):
             ax.plot(x, values, marker=".", label=f"Restart {index} (0 = run awal)")
@@ -121,7 +132,6 @@ def plot_objective(data: Mapping[str, Any], path: str | Path | None = None) -> F
 
 
 def plot_sa_exponential(data: Mapping[str, Any], path: str | Path | None = None) -> Figure:
-    """Use only logged worsening proposals; no values are filled into missing iterations."""
     if _algorithm(data) != "simulated_annealing":
         raise ValueError("SA exponential plot requires a Simulated Annealing result")
     _segments(data)
@@ -157,17 +167,20 @@ def plot_sa_exponential(data: Mapping[str, Any], path: str | Path | None = None)
 
 
 def plot_run_comparison(runs: Mapping[str, Mapping[str, Any]], path: str | Path | None = None) -> Figure:
-    """Compare runs of one algorithm without padding, smoothing or interpolation."""
     if not runs:
         raise ValueError("at least one run is required")
     algorithms = {_algorithm(data) for data in runs.values()}
     if len(algorithms) != 1:
         raise ValueError("compare runs of the same algorithm to keep axis and history meaning consistent")
     algorithm = next(iter(algorithms))
+    objectives = {_objective_name(data) for data in runs.values()}
+    if len(objectives) != 1:
+        raise ValueError("compare runs with the same objective; scores have different meanings")
+    objective_name = next(iter(objectives))
     segments = {name: _segments(data) for name, data in runs.items()}
     suffix = "maksimum populasi" if algorithm == "genetic_algorithm" else "state saat ini"
     fig, ax = _new_plot(TITLES[algorithm] + " - perbandingan " + suffix,
-                        _xlabel(algorithm), "Objective (total value)")
+                        _xlabel(algorithm), OBJECTIVE_LABELS[objective_name])
     for index, (name, parts) in enumerate(segments.items()):
         color = plt.get_cmap("tab10")(index % 10)
         for part, (x, values) in enumerate(parts):
@@ -176,7 +189,6 @@ def plot_run_comparison(runs: Mapping[str, Mapping[str, Any]], path: str | Path 
 
 
 def plot_saved_result(path: str | Path, output_dir: str | Path) -> dict[str, Path]:
-    """Read one saved run and export figures without executing a search algorithm."""
     data = load_json(path)
     if not isinstance(data, dict):
         raise ValueError("result JSON must contain one result object")
@@ -189,7 +201,12 @@ def plot_saved_result(path: str | Path, output_dir: str | Path) -> dict[str, Pat
     files = {"objective": destination / "objective.png", "states": destination / "states.png"}
     fig = plot_objective(data, files["objective"])
     plt.close(fig)
-    fig = plot_state_comparison(initial_state, final_state, files["states"])
+    fig = plot_state_comparison(initial_state, final_state)
+    if _objective_name(data) != "total_value":
+        fig.suptitle(f"Objective: {_objective_name(data)} | "
+                     f"Skor awal: {data['initial_objective']:.3f} | Skor akhir: {data['final_objective']:.3f}")
+    files["states"].parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(files["states"], dpi=150)
     plt.close(fig)
     if _algorithm(data) == "simulated_annealing":
         files["sa_exponential"] = destination / "sa_exponential.png"

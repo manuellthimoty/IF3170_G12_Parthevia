@@ -6,6 +6,7 @@ from time import perf_counter
 from ..initial_state import random_initial_state
 from ..model import AXES, ConstraintChecker, State, objective
 from ..neighbors import move_package, rotate_orientation, rotate_package, swap_packages
+from ..objectives import get_objective
 from ..result import SearchResult
 
 
@@ -25,7 +26,6 @@ def _crossover(first: State, second: State, checker: ConstraintChecker,
         child = State(first.truck, packages)
         if checker.is_valid(child):
             return child
-    # Tolak anak invalid; fallback tetap acak dan tidak mengubah parent.
     return rng.choice((first, second)).copy()
 
 
@@ -51,7 +51,6 @@ def _mutate(state: State, checker: ConstraintChecker, rng: random.Random, attemp
                 ny = max(0, state.truck.length - length + 1)
                 nz = max(0, state.truck.height - height + 1)
                 count = nx * ny * nz
-                # Sampling seragam semua posisi + outside, tanpa membuat list sel.
                 index = rng.randrange(count + 1)
                 position = None
                 if index < count:
@@ -79,8 +78,8 @@ def genetic_algorithm(
     initial_fill_prob: float = 0.7,
     initial_attempts: int = 20,
     seed: int | None = None,
+    objective_name: str = "total_value",
 ) -> SearchResult:
-    """Use input as a problem template; history includes random generation 0."""
     for name, value, minimum in (
         ("population_size", population_size, 2),
         ("max_generations", max_generations, 0),
@@ -103,6 +102,7 @@ def genetic_algorithm(
         raise ValueError("rng must be a random.Random instance")
     if isinstance(rng, random.SystemRandom):
         raise ValueError("rng must support reproducible state; use random.Random")
+    fitness_fn = objective if objective_name == "total_value" else get_objective(objective_name)
 
     start = perf_counter()
     rng_state = rng.getstate() if rng is not None else None
@@ -110,6 +110,11 @@ def genetic_algorithm(
         seed = seed if seed is not None else random.SystemRandom().randrange(2**63)
         rng = random.Random(seed)
     checker = ConstraintChecker(initial_state.truck)
+    if objective_name != "total_value":
+        outside = initial_state.copy()
+        for package in outside:
+            package.position = None
+        fitness_fn(outside, checker)
     population = [
         random_initial_state(initial_state.truck, initial_state, rng,
                              fill_prob=initial_fill_prob, attempts=initial_attempts)
@@ -121,7 +126,7 @@ def genetic_algorithm(
     best: State | None = None
     best_value = float("-inf")
     for generation in range(max_generations + 1):
-        fitness = [objective(state, checker) for state in population]
+        fitness = [fitness_fn(state, checker) for state in population]
         best_index = max(range(population_size), key=lambda index: fitness[index])
         generation_best = fitness[best_index]
         history.append(generation_best)
@@ -134,7 +139,6 @@ def genetic_algorithm(
         if generation == max_generations:
             break
 
-        # Satu elite tidak ikut crossover/mutasi agar fitness maksimum tidak turun.
         next_population = [population[best_index].copy()]
         for _ in range(population_size - 1):
             first = _select_parent(population, fitness, rng, tournament_size)
@@ -171,10 +175,13 @@ def genetic_algorithm(
             "seed": seed,
             "rng_state": rng_state,
             "initial_selection": "first_max_fitness_generation_0",
+            "objective_name": objective_name,
         },
         extra={
             "mean_history": mean_history,
             "history_includes_generation_0": True,
             "duration_seconds": perf_counter() - start,
+            "initial_total_value": initial.total_value,
+            "final_total_value": best.total_value,
         },
     )
