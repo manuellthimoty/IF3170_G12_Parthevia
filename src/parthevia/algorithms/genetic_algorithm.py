@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import random
+from math import isfinite
 from time import perf_counter
 
 from ..initial_state import random_initial_state
@@ -9,20 +10,24 @@ from ..neighbors import move_package, rotate_orientation, rotate_package, swap_p
 from ..objectives import get_objective
 from ..result import SearchResult
 
+GA_VARIANT = "roulette_single_point"
 
-def _select_parent(population: list[State], fitness: list[float], rng: random.Random,
-                   tournament_size: int) -> State:
-    candidates = [rng.randrange(len(population)) for _ in range(tournament_size)]
-    return population[max(candidates, key=lambda index: fitness[index])]
+
+def _select_parent(population: list[State], fitness: list[float], rng: random.Random) -> State:
+    if not any(fitness):
+        return rng.choice(population)
+    return rng.choices(population, weights=fitness, k=1)[0]
 
 
 def _crossover(first: State, second: State, checker: ConstraintChecker,
                rng: random.Random, attempts: int) -> State:
+    ids = list(first.packages)
+    if len(ids) < 2:
+        return rng.choice((first, second)).copy()
     for _ in range(attempts):
-        packages = [
-            (package if rng.random() < 0.5 else second[package.id]).copy()
-            for package in first
-        ]
+        point = rng.randrange(1, len(ids))
+        packages = [first[package_id].copy() for package_id in ids[:point]]
+        packages.extend(second[package_id].copy() for package_id in ids[point:])
         child = State(first.truck, packages)
         if checker.is_valid(child):
             return child
@@ -70,9 +75,7 @@ def genetic_algorithm(
     rng: random.Random | None = None,
     population_size: int = 30,
     max_generations: int = 100,
-    crossover_rate: float = 0.8,
     mutation_rate: float = 0.2,
-    tournament_size: int = 3,
     crossover_attempts: int = 10,
     mutation_attempts: int = 40,
     initial_fill_prob: float = 0.7,
@@ -83,14 +86,13 @@ def genetic_algorithm(
     for name, value, minimum in (
         ("population_size", population_size, 2),
         ("max_generations", max_generations, 0),
-        ("tournament_size", tournament_size, 1),
         ("crossover_attempts", crossover_attempts, 1),
         ("mutation_attempts", mutation_attempts, 1),
         ("initial_attempts", initial_attempts, 1),
     ):
         if isinstance(value, bool) or not isinstance(value, int) or value < minimum:
             raise ValueError(f"{name} must be an integer >= {minimum}")
-    for name, value in (("crossover_rate", crossover_rate), ("mutation_rate", mutation_rate),
+    for name, value in (("mutation_rate", mutation_rate),
                         ("initial_fill_prob", initial_fill_prob)):
         if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 <= value <= 1:
             raise ValueError(f"{name} must be in [0, 1]")
@@ -127,26 +129,24 @@ def genetic_algorithm(
     best_value = float("-inf")
     for generation in range(max_generations + 1):
         fitness = [fitness_fn(state, checker) for state in population]
+        if any(not isfinite(value) or value < 0 for value in fitness) or not isfinite(sum(fitness)):
+            raise ValueError("roulette selection requires finite, non-negative fitness")
         best_index = max(range(population_size), key=lambda index: fitness[index])
         generation_best = fitness[best_index]
         history.append(generation_best)
         mean_history.append(sum(fitness) / population_size)
         if generation == 0:
             initial = population[best_index].copy()
-        if best is None or generation_best > best_value:
-            best = population[best_index].copy()
-            best_value = generation_best
+        best = population[best_index].copy()
+        best_value = generation_best
         if generation == max_generations:
             break
 
-        next_population = [population[best_index].copy()]
-        for _ in range(population_size - 1):
-            first = _select_parent(population, fitness, rng, tournament_size)
-            if rng.random() < crossover_rate:
-                second = _select_parent(population, fitness, rng, tournament_size)
-                child = _crossover(first, second, checker, rng, crossover_attempts)
-            else:
-                child = first.copy()
+        next_population = []
+        for _ in range(population_size):
+            first = _select_parent(population, fitness, rng)
+            second = _select_parent(population, fitness, rng)
+            child = _crossover(first, second, checker, rng, crossover_attempts)
             if rng.random() < mutation_rate:
                 child = _mutate(child, checker, rng, mutation_attempts)
             next_population.append(child)
@@ -164,10 +164,12 @@ def genetic_algorithm(
         params={
             "population_size": population_size,
             "max_generations": max_generations,
-            "crossover_rate": crossover_rate,
             "mutation_rate": mutation_rate,
-            "tournament_size": tournament_size,
-            "elite_count": 1,
+            "ga_variant": GA_VARIANT,
+            "selection": "fitness_proportionate",
+            "crossover": "single_point",
+            "elite_count": 0,
+            "final_selection": "best_final_population",
             "crossover_attempts": crossover_attempts,
             "mutation_attempts": mutation_attempts,
             "initial_fill_prob": initial_fill_prob,

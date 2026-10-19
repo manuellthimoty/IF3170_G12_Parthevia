@@ -11,6 +11,7 @@ from typing import Any
 import matplotlib.pyplot as plt
 
 from .algorithms import genetic_algorithm
+from .algorithms.genetic_algorithm import GA_VARIANT
 from .io import load_json, load_problem_data, save_json, state_from_dict
 from .model import ConstraintChecker, State
 from .objectives import OBJECTIVES, get_objective
@@ -25,7 +26,7 @@ CONFIGURATIONS = [
     for population in (12, 24, 48)
 ]
 COMMON_PARAMS = {
-    "crossover_rate": 0.8, "mutation_rate": 0.2, "tournament_size": 3,
+    "mutation_rate": 0.2,
     "crossover_attempts": 10, "mutation_attempts": 40,
     "initial_fill_prob": 0.7, "initial_attempts": 20,
 }
@@ -49,13 +50,13 @@ def run_ga_experiments(input_path: str | Path, output_dir: str | Path,
         "dataset_source": input_data.get("source", "Source not specified by input file"),
         "objective": "total_value_of_inside_packages" if objective_name == "total_value" else objective_name,
         "objective_name": objective_name,
+        "ga_variant": GA_VARIANT,
         "seeds": list(SEEDS), "configurations": CONFIGURATIONS, "common_params": COMMON_PARAMS,
         "expected_runs": len(CONFIGURATIONS) * len(SEEDS),
         "history_includes_generation_0": True,
         "selection_rationale": (
-            "Pilot terpisah p12/g10 dan p24/g20 selesai sekitar 0.10 dan 0.27 detik. "
-            "Rentang generasi 20/60/120 dan populasi 12/24/48 memperluas anggaran pencarian "
-            "dengan waktu wajar; perubahan hasil tidak dijamin. Operator tetap default GA. "
+            "Matriks generasi 20/60/120 dan populasi 12/24/48 mengikuti protokol Batch 4. "
+            "Pilot Batch 4 memakai operator GA lama, bukan pengukuran varian roulette/single-point ini. "
             "A_p24_g60 dan B_p24_g60 sengaja diulang terpisah sebagai kontrol kedua rangkaian."
         ),
         "python_version": platform.python_version(),
@@ -110,7 +111,11 @@ def verify_ga_experiments(output_dir: str | Path) -> list[dict[str, Any]]:
                 "objective": plan["objective"], "requested_generations": config["max_generations"],
             }
             expected_params = dict(plan["common_params"], population_size=config["population_size"],
-                                   max_generations=config["max_generations"], seed=seed, elite_count=1)
+                                   max_generations=config["max_generations"], seed=seed,
+                                   elite_count=0 if "ga_variant" in plan else 1)
+            if "ga_variant" in plan:
+                expected_params.update(ga_variant=plan["ga_variant"], selection="fitness_proportionate",
+                                       crossover="single_point", final_selection="best_final_population")
             if "objective_name" in plan:
                 expected_params["objective_name"] = objective_name
             if (data["algorithm"] != "genetic_algorithm"
@@ -142,7 +147,8 @@ def verify_ga_experiments(output_dir: str | Path) -> list[dict[str, Any]]:
             if (len(maximum) != actual + 1 or len(average) != len(maximum)
                     or not data["extra"].get("history_includes_generation_0")
                     or not all(isfinite(value) for value in maximum + average)
-                    or any(a > b for a, b in zip(maximum, maximum[1:]))
+                    or (data["params"].get("elite_count", 1) > 0
+                        and any(a > b for a, b in zip(maximum, maximum[1:])))
                     or any(avg > best + 1e-9 for avg, best in zip(average, maximum))
                     or not isclose(maximum[0], data["initial_objective"])
                     or not isclose(maximum[-1], data["final_objective"])
@@ -169,6 +175,7 @@ def summarize_ga_experiments(output_dir: str | Path) -> dict[str, Any]:
                          total_value_mean=mean(totals)))
     summary = {
         "run_count": len(records),
+        "ga_variant": load_json(root / "plan.json").get("ga_variant", "legacy_tournament_uniform_elitism"),
         "objective_name": load_json(root / "plan.json").get("objective_name", "total_value"),
         "completed_as_planned": sum(data["experiment"]["completed_as_planned"] for data in records),
         "variation_measure": "sample standard deviation, denominator n - 1, n = 3 per configuration",
