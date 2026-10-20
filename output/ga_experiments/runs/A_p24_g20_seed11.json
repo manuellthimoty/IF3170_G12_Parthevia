@@ -307,8 +307,8 @@
         },
         "orientation": [
           "x",
-          "z",
-          "y"
+          "y",
+          "z"
         ],
         "value": 25,
         "weight": 6,
@@ -404,9 +404,9 @@
           "h": 1
         },
         "orientation": [
-          "y",
+          "z",
           "x",
-          "z"
+          "y"
         ],
         "value": 9,
         "weight": 1,
@@ -529,9 +529,9 @@
         "isFragile": false,
         "ETA": 2,
         "position": [
-          4,
           0,
-          1
+          0,
+          0
         ]
       },
       {
@@ -569,9 +569,9 @@
         "isFragile": false,
         "ETA": 1,
         "position": [
-          3,
-          0,
-          0
+          1,
+          1,
+          2
         ]
       }
     ]
@@ -605,44 +605,49 @@
   "params": {
     "population_size": 24,
     "max_generations": 20,
-    "crossover_rate": 0.8,
     "mutation_rate": 0.2,
-    "tournament_size": 3,
-    "elite_count": 1,
+    "ga_variant": "roulette_single_point",
+    "selection": "fitness_proportionate",
+    "crossover": "single_point",
+    "elite_count": 0,
+    "final_selection": "best_final_population",
     "crossover_attempts": 10,
     "mutation_attempts": 40,
     "initial_fill_prob": 0.7,
     "initial_attempts": 20,
     "seed": 11,
     "rng_state": null,
-    "initial_selection": "first_max_fitness_generation_0"
+    "initial_selection": "first_max_fitness_generation_0",
+    "objective_name": "total_value"
   },
   "extra": {
     "mean_history": [
       111.33333333333333,
-      105.41666666666667,
-      117.75,
-      121.04166666666667,
-      123.91666666666667,
-      122.75,
-      117.16666666666667,
-      119.875,
-      118.5,
-      120.125,
-      118.33333333333333,
-      113.125,
-      116.45833333333333,
-      121.29166666666667,
-      122.79166666666667,
-      120.79166666666667,
-      124.04166666666667,
-      119.5,
-      123.125,
-      123.5,
-      118.0
+      104.54166666666667,
+      88.91666666666667,
+      91.58333333333333,
+      93.79166666666667,
+      94.41666666666667,
+      103.0,
+      106.25,
+      109.66666666666667,
+      113.25,
+      116.91666666666667,
+      113.70833333333333,
+      116.70833333333333,
+      118.125,
+      121.16666666666667,
+      118.79166666666667,
+      117.95833333333333,
+      117.625,
+      118.41666666666667,
+      117.5,
+      117.20833333333333
     ],
     "history_includes_generation_0": true,
-    "duration_seconds": 0.3539361000293866
+    "duration_seconds": 0.4531557000000248,
+    "initial_total_value": 125,
+    "final_total_value": 125
   },
   "experiment": {
     "run_id": "A_p24_g20_seed11",

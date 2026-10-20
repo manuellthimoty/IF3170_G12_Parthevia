@@ -1,5 +1,7 @@
 {
   "run_count": 18,
+  "ga_variant": "roulette_single_point",
+  "objective_name": "total_value",
   "completed_as_planned": 18,
   "variation_measure": "sample standard deviation, denominator n - 1, n = 3 per configuration",
   "verification": "All saved initial/final states, IDs, objectives, seeds, parameters and history lengths checked.",
@@ -21,13 +23,19 @@
       ],
       "final_objectives": [
         125.0,
-        133.0,
-        123.0
+        115.0,
+        115.0
       ],
-      "objective_mean": 127.0,
-      "objective_sample_sd": 5.291502622129181,
-      "duration_mean_seconds": 0.31462133332388476,
-      "duration_sample_sd_seconds": 0.03655787362343046
+      "objective_mean": 118.33333333333333,
+      "objective_sample_sd": 5.773502691896257,
+      "duration_mean_seconds": 0.48104239999975107,
+      "duration_sample_sd_seconds": 0.061557627855354395,
+      "final_total_values": [
+        125,
+        115,
+        115
+      ],
+      "total_value_mean": 118.33333333333333
     },
     {
       "id": "A_p24_g60",
@@ -45,14 +53,20 @@
         47
       ],
       "final_objectives": [
-        126.0,
-        133.0,
-        124.0
+        125.0,
+        115.0,
+        131.0
       ],
-      "objective_mean": 127.66666666666667,
-      "objective_sample_sd": 4.725815626252609,
-      "duration_mean_seconds": 0.6262498333235271,
-      "duration_sample_sd_seconds": 0.04170222303450149
+      "objective_mean": 123.66666666666667,
+      "objective_sample_sd": 8.082903768654761,
+      "duration_mean_seconds": 1.0769034666664083,
+      "duration_sample_sd_seconds": 0.4161688657370792,
+      "final_total_values": [
+        125,
+        115,
+        131
+      ],
+      "total_value_mean": 123.66666666666667
     },
     {
       "id": "A_p24_g120",
@@ -70,14 +84,20 @@
         47
       ],
       "final_objectives": [
-        126.0,
-        133.0,
-        124.0
+        125.0,
+        115.0,
+        140.0
       ],
-      "objective_mean": 127.66666666666667,
-      "objective_sample_sd": 4.725815626252609,
-      "duration_mean_seconds": 1.0555716666470591,
-      "duration_sample_sd_seconds": 0.08054235031183805
+      "objective_mean": 126.66666666666667,
+      "objective_sample_sd": 12.583057392117917,
+      "duration_mean_seconds": 2.0143657000004773,
+      "duration_sample_sd_seconds": 0.39786353547202963,
+      "final_total_values": [
+        125,
+        115,
+        140
+      ],
+      "total_value_mean": 126.66666666666667
     },
     {
       "id": "B_p12_g60",
@@ -95,14 +115,20 @@
         47
       ],
       "final_objectives": [
-        123.0,
-        130.0,
+        105.0,
+        127.0,
         124.0
       ],
-      "objective_mean": 125.66666666666667,
-      "objective_sample_sd": 3.7859388972001824,
-      "duration_mean_seconds": 0.27875239999654394,
-      "duration_sample_sd_seconds": 0.04990012816064991
+      "objective_mean": 118.66666666666667,
+      "objective_sample_sd": 11.930353445448853,
+      "duration_mean_seconds": 0.45811416666704946,
+      "duration_sample_sd_seconds": 0.045523832905066806,
+      "final_total_values": [
+        105,
+        127,
+        124
+      ],
+      "total_value_mean": 118.66666666666667
     },
     {
       "id": "B_p24_g60",
@@ -120,14 +146,20 @@
         47
       ],
       "final_objectives": [
-        126.0,
-        133.0,
-        124.0
+        125.0,
+        115.0,
+        131.0
       ],
-      "objective_mean": 127.66666666666667,
-      "objective_sample_sd": 4.725815626252609,
-      "duration_mean_seconds": 0.6274923332966864,
-      "duration_sample_sd_seconds": 0.047098102426421956
+      "objective_mean": 123.66666666666667,
+      "objective_sample_sd": 8.082903768654761,
+      "duration_mean_seconds": 1.1261012000001454,
+      "duration_sample_sd_seconds": 0.4717020697188365,
+      "final_total_values": [
+        125,
+        115,
+        131
+      ],
+      "total_value_mean": 123.66666666666667
     },
     {
       "id": "B_p48_g60",
@@ -145,14 +177,20 @@
         47
       ],
       "final_objectives": [
-        130.0,
         133.0,
+        121.0,
         132.0
       ],
-      "objective_mean": 131.66666666666666,
-      "objective_sample_sd": 1.5275252316519468,
-      "duration_mean_seconds": 1.059279866691213,
-      "duration_sample_sd_seconds": 0.1594932233167779
+      "objective_mean": 128.66666666666666,
+      "objective_sample_sd": 6.6583281184793925,
+      "duration_mean_seconds": 2.3952686666668037,
+      "duration_sample_sd_seconds": 0.3630644254268261,
+      "final_total_values": [
+        133,
+        121,
+        132
+      ],
+      "total_value_mean": 128.66666666666666
     }
   ]
 }

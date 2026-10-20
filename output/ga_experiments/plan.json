@@ -5,6 +5,8 @@
   "input_sha256": "29af42ca24b73067c6233cd5933ab14ed4c9041c88e59b845c530a3ffad963b6",
   "dataset_source": "Dataset buatan anggota C untuk eksperimen GA; bukan data resmi kelompok atau spesifikasi.",
   "objective": "total_value_of_inside_packages",
+  "objective_name": "total_value",
+  "ga_variant": "roulette_single_point",
   "seeds": [
     11,
     29,
@@ -49,9 +51,7 @@
     }
   ],
   "common_params": {
-    "crossover_rate": 0.8,
     "mutation_rate": 0.2,
-    "tournament_size": 3,
     "crossover_attempts": 10,
     "mutation_attempts": 40,
     "initial_fill_prob": 0.7,
@@ -59,7 +59,7 @@
   },
   "expected_runs": 18,
   "history_includes_generation_0": true,
-  "selection_rationale": "Pilot terpisah p12/g10 dan p24/g20 selesai sekitar 0.10 dan 0.27 detik. Rentang generasi 20/60/120 dan populasi 12/24/48 memperluas anggaran pencarian dengan waktu wajar; perubahan hasil tidak dijamin. Operator tetap default GA. A_p24_g60 dan B_p24_g60 sengaja diulang terpisah sebagai kontrol kedua rangkaian.",
-  "python_version": "3.13.7",
-  "algorithm_sha256": "885d19f78be93dff5d0c4fab291b3159344e4d295dd56685ed6422fefcf86cc3"
+  "selection_rationale": "Matriks generasi 20/60/120 dan populasi 12/24/48 mengikuti protokol Batch 4. Pilot Batch 4 memakai operator GA lama, bukan pengukuran varian roulette/single-point ini. A_p24_g60 dan B_p24_g60 sengaja diulang terpisah sebagai kontrol kedua rangkaian.",
+  "python_version": "3.13.0",
+  "algorithm_sha256": "1ce9c89be1a61041c9ec0ffad7e679c6dcec935837376a510999ed40eec74df0"
 }
